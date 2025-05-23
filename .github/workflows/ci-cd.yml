@@ -56,10 +56,10 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd /home/debian/payetonkawa/PayeTonKawa-Customers
+          cd /home/debian/PayeTonKawa-Customers
           git pull origin main
 
-          cd /home/debian/payetonkawa/PayeTonKawa
+          cd /home/debian/PayeTonKawa
           sudo docker-compose stop PTK-api-customers
           sudo docker-compose up -d --build PTK-api-customers
 
