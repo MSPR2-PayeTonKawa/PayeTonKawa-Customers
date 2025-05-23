@@ -1,19 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get("/", function () {
-    return view("welcome");
-});
-
-Route::get("/customers/api/test", function () {
-    return response()->json([
-        "status" => "success",
-        "service" => "customers-api",
-        "message" => "Le service Customers API fonctionne correctement",
-        "data" => [
-            "customers_count" => 42,
-            "version" => "1.0.0"
-        ]
-    ]);
-});
+Route::get('/', [HomeController::class, 'index']);
