@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Companies extends Model
 {
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'billing_address_id',
+        'shipping_address_id'
+    ];
+
+    protected $attributes = [
+        'phone' => null,
+        'billing_address_id' => null,
+        'shipping_address_id' => null
+    ];
+
     public function customers() {
         return $this->hasMany(Customers::class);
     }
