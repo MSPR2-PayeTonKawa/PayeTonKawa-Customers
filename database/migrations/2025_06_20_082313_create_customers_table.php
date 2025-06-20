@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('username', 45)->unique();
-            $table->string('hashed_salted_password', 255);
+            //$table->string('hashed_salted_password', 255);
             $table->string('last_name', 45);
             $table->string('first_name', 45);
             $table->string('email', 100)->unique();
             $table->string('phone', 20)->nullable();
             $table->boolean('is_active')->default(true);
-            $table->datetime('created_at')->useCurrent();
             $table->datetime('password_updated_at')->useCurrent()->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies')->onDelete('set null');
             $table->timestamps();

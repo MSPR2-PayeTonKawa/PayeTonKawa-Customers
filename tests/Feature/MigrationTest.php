@@ -50,6 +50,8 @@ class MigrationTest extends TestCase
             'phone',
             'billing_address_id',
             'shipping_address_id',
+            'created_at',
+            'updated_at',
         ];
 
         foreach ($expectedColumns as $column) {
@@ -68,15 +70,16 @@ class MigrationTest extends TestCase
         $expectedColumns = [
             'id',
             'username',
-            'hashed_salted_password',
+            //'hashed_salted_password',
             'last_name',
             'first_name',
             'email',
             'phone',
             'is_active',
-            'created_at',
             'password_updated_at',
             'company_id',
+            'created_at',
+            'updated_at',
         ];
 
         foreach ($expectedColumns as $column) {
