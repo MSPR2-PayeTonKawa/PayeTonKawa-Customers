@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\Models\Companies;
 
@@ -25,20 +26,28 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100|unique:companies,email',
-            'phone' => 'nullable|string|max:20',
-            'billing_address_id' => 'nullable|exists:addresses,id',
-            'shipping_address_id' => 'nullable|exists:addresses,id'
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:100',
+                'email' => 'required|email|max:100|unique:companies,email',
+                'phone' => 'nullable|string|max:20',
+                'billing_address_id' => 'nullable|exists:addresses,id',
+                'shipping_address_id' => 'nullable|exists:addresses,id'
+            ]);
 
-        Companies::create($validated);
+            Companies::create($validated);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Company registered successfully.',
-        ], 201);
+            return response()->json([
+                'status' => true,
+                'message' => 'Company registered successfully.',
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed.',
+                'errors' => $e->errors(),
+            ], 422);
+        }
     }
 
     /**
@@ -68,6 +77,7 @@ class CompaniesController extends Controller
         ]);
 
         $companies->update($validated);
+
         return response()->json([
             'status' => true,
             'message' => 'Company updated successfully.',

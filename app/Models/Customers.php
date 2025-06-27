@@ -21,13 +21,6 @@ class Customers extends Model
         'is_active',
     ];
 
-    protected $attributes = [
-        'phone' => null,
-        'is_active' => true,
-        'company_id' => null,
-        'password_updated_at' => null,
-    ];
-
     public function company() {
         return $this->belongsTo(Companies::class);
     }

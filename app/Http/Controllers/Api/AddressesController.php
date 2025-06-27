@@ -13,7 +13,6 @@ class AddressesController extends Controller
      */
     public function index()
     {
-        //return Addresses::with(['billingCompanies', 'shippingCompanies'])->get();
         return response()->json([
             'status' => true,
             'message' => 'Addresses retrieved successfully.',
@@ -51,7 +50,11 @@ class AddressesController extends Controller
      */
     public function show(Addresses $addresses)
     {
-        return $addresses->load(['billingCompanies', 'shippingCompanies']);
+        return response()->json([
+            'status' => true,
+            'message' => 'Address found.',
+            'data' => $addresses
+        ]);
     }
 
     /**

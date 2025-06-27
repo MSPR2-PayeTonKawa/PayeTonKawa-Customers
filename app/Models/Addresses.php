@@ -18,12 +18,6 @@ class Addresses extends Model
         'longitude'
     ];
 
-    protected $attributes = [
-        'number_complement' => null,
-        'latitude' => null,
-        'longitude' => null
-    ];
-
     public function billingCompanies() {
         return $this->hasMany(Companies::class, 'billing_address_id');
     }

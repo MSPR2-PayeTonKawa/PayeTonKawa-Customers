@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use App\Models\Customers;
 use Illuminate\Http\Request;
 
@@ -25,23 +26,32 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'username' => 'required|string|max:45|unique:customers,username',
-            'last_name' => 'required|string|max:45',
-            'first_name' => 'required|string|max:45',
-            'email' => 'required|email|max:100|unique:customers,email',
-            'phone' => 'nullable|string|max:20',
-            'is_active' => 'boolean',
-            'password_updated_at' => 'nullable|date',
-            'company_id' => 'nullable|exists:companies,id',
-        ]);
+        try {
+            $validated = $request->validate([
+                'username' => 'required|string|max:45|unique:customers,username',
+                'last_name' => 'required|string|max:45',
+                'first_name' => 'required|string|max:45',
+                'email' => 'required|email|max:100|unique:customers,email',
+                'phone' => 'nullable|string|max:20',
+                'is_active' => 'boolean',
+                'password_updated_at' => 'nullable|date',
+                'company_id' => 'nullable|exists:companies,id',
+            ]);
 
-        Customers::create($validated);
+            Customers::create($validated);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Customer registered successfully.',
-        ], 201);
+            return response()->json([
+                'status' => true,
+                'message' => 'Customer registered successfully.',
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation failed.',
+                'errors' => $e->errors(),
+            ], 422);
+        }
+
     }
 
     /**

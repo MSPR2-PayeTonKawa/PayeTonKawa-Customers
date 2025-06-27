@@ -14,12 +14,6 @@ class Companies extends Model
         'shipping_address_id'
     ];
 
-    protected $attributes = [
-        'phone' => null,
-        'billing_address_id' => null,
-        'shipping_address_id' => null
-    ];
-
     public function customers() {
         return $this->hasMany(Customers::class);
     }
