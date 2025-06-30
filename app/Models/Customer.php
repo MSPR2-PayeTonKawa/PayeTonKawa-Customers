@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customers extends Model
+class Customer extends Model
 {
     protected $fillable = [
         'username',
@@ -22,6 +22,6 @@ class Customers extends Model
     ];
 
     public function company() {
-        return $this->belongsTo(Companies::class);
+        return $this->belongsTo(Company::class);
     }
 }

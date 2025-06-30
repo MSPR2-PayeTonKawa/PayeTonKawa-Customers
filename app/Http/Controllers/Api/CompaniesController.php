@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
-use App\Models\Companies;
+use App\Models\Company;
 
 class CompaniesController extends Controller
 {
@@ -17,7 +17,7 @@ class CompaniesController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Companies retrieved successfully.',
-            'data' => [Companies::all()]
+            'data' => [Company::all()]
         ]);
     }
 
@@ -35,7 +35,7 @@ class CompaniesController extends Controller
                 'shipping_address_id' => 'nullable|exists:addresses,id'
             ]);
 
-            Companies::create($validated);
+            Company::create($validated);
 
             return response()->json([
                 'status' => true,
@@ -53,30 +53,29 @@ class CompaniesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Companies $companies)
+    public function show(Company $company)
     {
-        //return $companies->load(['billingAddresses', 'shippingAddresses']);
         return response()->json([
             'status' => true,
             'message' => 'Company found.',
-            'data' => $companies
+            'data' => $company
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Companies $companies)
+    public function update(Request $request, Company $company)
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:100',
-            'email' => 'sometimes|email|max:100|unique:companies,email,' . $companies->email,
+            'email' => 'sometimes|email|max:100|unique:companies,email,' . $company->email,
             'phone' => 'nullable|string|max:20',
             'billing_address_id' => 'nullable|exists:addresses,id',
             'shipping_address_id' => 'nullable|exists:addresses,id'
         ]);
 
-        $companies->update($validated);
+        $company->update($validated);
 
         return response()->json([
             'status' => true,
@@ -87,9 +86,9 @@ class CompaniesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Companies $companies)
+    public function destroy(Company $company)
     {
-        $companies->delete();
+        $company->delete();
         return response()->json([
             'status' => true,
             'message' => 'Company deleted successfully.',

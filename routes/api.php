@@ -6,12 +6,6 @@ use App\Http\Controllers\Api\AddressesController;
 use App\Http\Controllers\Api\CompaniesController;
 use App\Http\Controllers\Api\CustomersController;
 
-Route::apiResource('/customers', CustomersController::class)->parameters([
-    'customers' => 'customers'
-]);
-Route::apiResource('/companies', CompaniesController::class)->parameters([
-    'companies' => 'companies'
-]);
-Route::apiResource('/addresses', AddressesController::class)->parameters([
-    'addresses' => 'addresses'
-]);
+Route::apiResource('/customers', CustomersController::class);
+Route::apiResource('/companies', CompaniesController::class);
+Route::apiResource('/addresses', AddressesController::class);

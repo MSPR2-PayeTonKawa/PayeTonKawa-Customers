@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Addresses;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class AddressesController extends Controller
@@ -16,7 +16,7 @@ class AddressesController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Addresses retrieved successfully.',
-            'data' => [Addresses::all()]
+            'data' => [Address::all()]
         ]);
     }
 
@@ -37,7 +37,7 @@ class AddressesController extends Controller
             'longitude' => 'nullable|string|max:30'
         ]);
 
-        Addresses::create($validated);
+        Address::create($validated);
 
         return response()->json([
             'status' => true,
@@ -48,19 +48,19 @@ class AddressesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Addresses $addresses)
+    public function show(Address $address)
     {
         return response()->json([
             'status' => true,
             'message' => 'Address found.',
-            'data' => $addresses
+            'data' => $address
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Addresses $addresses)
+    public function update(Request $request, Address $address)
     {
         $validated = $request->validate([
             'number' => 'sometimes|integer',
@@ -74,7 +74,7 @@ class AddressesController extends Controller
             'longitude' => 'nullable|string|max:30'
         ]);
 
-        $addresses->update($validated);
+        $address->update($validated);
         return response()->json([
             'status' => true,
             'message' => 'Address updated successfully.',
@@ -84,9 +84,9 @@ class AddressesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Addresses $addresses)
+    public function destroy(Address $address)
     {
-        $addresses->delete();
+        $address->delete();
         return response()->json([
             'status' => true,
             'message' => 'Address deleted successfully.',

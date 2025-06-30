@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use App\Models\Customers;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -17,7 +17,7 @@ class CustomersController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Customers retrieved successfully.',
-            'data' => [Customers::all()]
+            'data' => [Customer::all()]
         ]);
     }
 
@@ -38,7 +38,7 @@ class CustomersController extends Controller
                 'company_id' => 'nullable|exists:companies,id',
             ]);
 
-            Customers::create($validated);
+            Customer::create($validated);
 
             return response()->json([
                 'status' => true,
@@ -57,32 +57,32 @@ class CustomersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customers $customers)
+    public function show(Customer $customer)
     {
         return response()->json([
             'status' => true,
             'message' => 'Customer found.',
-            'data' => $customers
+            'data' => $customer
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customers $customers)
+    public function update(Request $request, Customer $customer)
     {
         $validated = $request->validate([
-            'username' => 'sometimes|required|string|max:45|unique:customers,username,' . $customers->id,
+            'username' => 'sometimes|required|string|max:45|unique:customers,username,' . $customer->id,
             'last_name' => 'sometimes|required|string|max:45',
             'first_name' => 'sometimes|required|string|max:45',
-            'email' => 'sometimes|required|email|max:100|unique:customers,email,' . $customers->id,
+            'email' => 'sometimes|required|email|max:100|unique:customers,email,' . $customer->id,
             'phone' => 'nullable|string|max:20',
             'is_active' => 'boolean',
             'password_updated_at' => 'nullable|date',
             'company_id' => 'nullable|exists:companies,id',
         ]);
 
-        $customers->update($validated);
+        $customer->update($validated);
 
         return response()->json([
             'status' => true,
@@ -93,9 +93,9 @@ class CustomersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customers $customers)
+    public function destroy(Customer $customer)
     {
-        $customers->delete();
+        $customer->delete();
         return response()->json([
             'status' => true,
             'message' => 'Customer deleted successfully.',
