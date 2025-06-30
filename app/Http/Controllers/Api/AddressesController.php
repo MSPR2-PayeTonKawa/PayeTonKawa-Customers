@@ -48,8 +48,17 @@ class AddressesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Address $address)
+    public function show($id)
     {
+        $address = Address::find($id);
+
+        if (!$address) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Address not found.',
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
             'message' => 'Address found.',
@@ -60,8 +69,17 @@ class AddressesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, $id)
     {
+        $address = Address::find($id);
+
+        if (!$address) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Address not found.',
+            ], 404);
+        }
+
         $validated = $request->validate([
             'number' => 'sometimes|integer',
             'number_complement' => 'nullable|string|max:10',
@@ -84,8 +102,17 @@ class AddressesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Address $address)
+    public function destroy($id)
     {
+        $address = Address::find($id);
+
+        if (!$address) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Address not found.',
+            ], 404);
+        }
+
         $address->delete();
         return response()->json([
             'status' => true,

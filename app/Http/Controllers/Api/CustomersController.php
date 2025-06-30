@@ -57,8 +57,17 @@ class CustomersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show($id)
     {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Customer not found.',
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
             'message' => 'Customer found.',
@@ -69,8 +78,17 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Customer not found.',
+            ], 404);
+        }
+
         $validated = $request->validate([
             'username' => 'sometimes|required|string|max:45|unique:customers,username,' . $customer->id,
             'last_name' => 'sometimes|required|string|max:45',
@@ -93,8 +111,17 @@ class CustomersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
+        $customer = Customer::find($id);
+
+        if (!$customer) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Customer not found.',
+            ], 404);
+        }
+
         $customer->delete();
         return response()->json([
             'status' => true,

@@ -53,8 +53,17 @@ class CompaniesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show($id)
     {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Company not found.',
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
             'message' => 'Company found.',
@@ -65,8 +74,17 @@ class CompaniesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, $id)
     {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Company not found.',
+            ], 404);
+        }
+
         $validated = $request->validate([
             'name' => 'sometimes|string|max:100',
             'email' => 'sometimes|email|max:100|unique:companies,email,' . $company->email,
@@ -86,8 +104,17 @@ class CompaniesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Company not found.',
+            ], 404);
+        }
+
         $company->delete();
         return response()->json([
             'status' => true,
