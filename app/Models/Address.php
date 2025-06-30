@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Addresses extends Model
+class Address extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'number',
         'number_complement',
@@ -18,17 +21,11 @@ class Addresses extends Model
         'longitude'
     ];
 
-    protected $attributes = [
-        'number_complement' => null,
-        'latitude' => null,
-        'longitude' => null
-    ];
-
     public function billingCompanies() {
-        return $this->hasMany(Companies::class, 'billing_address_id');
+        return $this->hasMany(Company::class, 'billing_address_id');
     }
 
     public function shippingCompanies() {
-        return $this->hasMany(Companies::class, 'shipping_address_id');
+        return $this->hasMany(Company::class, 'shipping_address_id');
     }
 }
