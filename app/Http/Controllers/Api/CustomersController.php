@@ -24,7 +24,6 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="email", type="string", format="email", description="Customer email"),
  *     @OA\Property(property="phone", type="string", description="Customer phone number (optional)"),
  *     @OA\Property(property="is_active", type="boolean", description="Is the customer active? (optional)"),
- *     @OA\Property(property="password_updated_at", type="string", format="date-time", description="When the password was last updated (optional)"),
  *     @OA\Property(property="company_id", type="integer", description="Company ID (optional, must exist in companies table)")
  * )
  */
@@ -103,7 +102,6 @@ class CustomersController extends Controller
                 'email' => 'required|email|max:100|unique:customers,email',
                 'phone' => 'nullable|string|max:20',
                 'is_active' => 'boolean',
-                'password_updated_at' => 'nullable|date',
                 'company_id' => 'nullable|exists:companies,id',
             ]);
 
@@ -230,7 +228,6 @@ class CustomersController extends Controller
             'email' => 'sometimes|required|email|max:100|unique:customers,email,' . $customer->id,
             'phone' => 'nullable|string|max:20',
             'is_active' => 'boolean',
-            'password_updated_at' => 'nullable|date',
             'company_id' => 'nullable|exists:companies,id',
         ]);
 
