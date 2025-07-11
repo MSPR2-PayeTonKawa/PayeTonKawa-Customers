@@ -684,11 +684,6 @@
                         "description": "Is the customer active? (optional)",
                         "type": "boolean"
                     },
-                    "password_updated_at": {
-                        "description": "When the password was last updated (optional)",
-                        "type": "string",
-                        "format": "date-time"
-                    },
                     "company_id": {
                         "description": "Company ID (optional, must exist in companies table)",
                         "type": "integer"

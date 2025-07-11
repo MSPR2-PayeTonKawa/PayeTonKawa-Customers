@@ -19,8 +19,6 @@ class Customer extends Model
     ];
 
     protected $hidden = [
-        //'hashed_salted_password',
-        'password_updated_at',
         'is_active',
     ];
 
