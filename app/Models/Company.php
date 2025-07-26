@@ -24,7 +24,18 @@ class Company extends Model
     public function billingAddress() {
         return $this->belongsTo(Address::class, 'billing_address_id');
     }
+
     public function shippingAddress() {
         return $this->belongsTo(Address::class, 'shipping_address_id');
+    }
+
+    public function hasBillingAddress(): bool
+    {
+        return !is_null($this->billing_address_id);
+    }
+
+    public function hasShippingAddress(): bool
+    {
+        return !is_null($this->shipping_address_id);
     }
 }

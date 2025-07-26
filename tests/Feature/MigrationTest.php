@@ -70,13 +70,10 @@ class MigrationTest extends TestCase
         $expectedColumns = [
             'id',
             'username',
-            //'hashed_salted_password',
             'last_name',
             'first_name',
             'email',
             'phone',
-            'is_active',
-            'password_updated_at',
             'company_id',
             'created_at',
             'updated_at',

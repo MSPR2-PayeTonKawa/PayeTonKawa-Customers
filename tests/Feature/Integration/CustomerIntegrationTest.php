@@ -2,27 +2,26 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Customer;
 use App\Models\Company;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-class CustomerTest extends TestCase
+class CustomerIntegrationTest extends TestCase
 {
     use RefreshDatabase;
 
     public function test_can_create_customer()
     {
         $response = $this->postJson('/api/customers', [
-            'username' => 'thibaudlamon',
-            'last_name' => 'Lamon',
-            'first_name' => 'Thibaud',
-            'email' => 'thibaud@example.com'
+            'username' => 'toto',
+            'last_name' => 'Test',
+            'first_name' => 'Tom',
+            'email' => 'toto@test.com',
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('customers', ['email' => 'thibaud@example.com']);
+        $this->assertDatabaseHas('customers', ['email' => 'toto@test.com']);
     }
 
     public function test_can_create_customer_with_optional_fields()
@@ -30,24 +29,24 @@ class CustomerTest extends TestCase
         $company = Company::factory()->create();
 
         $response = $this->postJson('/api/customers', [
-            'username' => 'thibaudlamon',
-            'first_name' => 'Thibaud',
-            'last_name' => 'Lamon',
-            'email' => 'thibaud@example.com',
+            'username' => 'toto',
+            'last_name' => 'Test',
+            'first_name' => 'Tom',
+            'email' => 'toto@test.com',
             'phone' => '0600000000',
             'company_id' => $company->id
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('customers', ['email' => 'thibaud@example.com']);
+        $this->assertDatabaseHas('customers', ['email' => 'toto@test.com']);
     }
 
     public function test_cannot_create_customer_with_invalid_email()
     {
         $response = $this->postJson('/api/customers', [
-            'username' => 'thibaudlamon',
-            'last_name' => 'Lamon',
-            'first_name' => 'Thibaud',
+            'username' => 'toto',
+            'last_name' => 'Test',
+            'first_name' => 'Tom',
             'email' => 'invalid-email'
         ]);
 
@@ -57,13 +56,13 @@ class CustomerTest extends TestCase
 
     public function test_cannot_create_customer_with_duplicate_email()
     {
-        Customer::factory()->create(['email' => 'thibaud@example.com']);
+        Customer::factory()->create(['email' => 'toto@test.com']);
 
         $response = $this->postJson('/api/customers', [
-            'username' => 'thibaudlamon',
-            'last_name' => 'Lamon',
-            'first_name' => 'Thibaud',
-            'email' => 'thibaud@example.com'
+            'username' => 'toto',
+            'last_name' => 'Test',
+            'first_name' => 'Tom',
+            'email' => 'toto@test.com',
         ]);
 
         $response->assertStatus(422)
@@ -72,13 +71,13 @@ class CustomerTest extends TestCase
 
     public function test_cannot_create_customer_with_duplicate_username()
     {
-        Customer::factory()->create(['username' => 'thibaudlamon']);
+        Customer::factory()->create(['username' => 'toto']);
 
         $response = $this->postJson('/api/customers', [
-            'username' => 'thibaudlamon',
-            'last_name' => 'Lamon',
-            'first_name' => 'Thibaud',
-            'email' => 'thibaud@example.com'
+            'username' => 'toto',
+            'last_name' => 'Test',
+            'first_name' => 'Tom',
+            'email' => 'toto@test.com'
         ]);
 
         $response->assertStatus(422)
