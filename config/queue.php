@@ -30,6 +30,18 @@ return [
 
     'connections' => [
 
+        'rabbitmq' => [
+            'driver' => 'rabbitmq',
+            'queue' => env('RABBITMQ_QUEUE', 'default'),
+            'connection' => [
+                'host' => env('RABBITMQ_HOST', '127.0.0.1'),
+                'port' => env('RABBITMQ_PORT', 15672),
+                'username' => env('RABBITMQ_USER', 'user'),
+                'password' => env('RABBITMQ_PASS', 'pass'),
+                'vhost' => '/',
+            ],
+        ],
+
         'sync' => [
             'driver' => 'sync',
         ],
