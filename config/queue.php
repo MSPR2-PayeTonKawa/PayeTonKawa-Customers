@@ -72,6 +72,15 @@ return [
             'after_commit' => false,
         ],
 
+        'rabbitmq' => [
+            'driver' => 'rabbitmq',
+            'connection' => env('RABBITMQ_CONNECTION', 'default'),
+            'queue' => env('RABBITMQ_QUEUE', 'default'),
+            'retry_after' => (int) env('RABBITMQ_QUEUE_RETRY_AFTER', 90),
+            'block_for' => null,
+            'after_commit' => false,
+        ]
+
     ],
 
     /*

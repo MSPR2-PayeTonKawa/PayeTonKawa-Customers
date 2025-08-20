@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\CustomerRegisteredEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use App\Models\Customer;
@@ -106,6 +107,13 @@ class CustomersController extends Controller
             ]);
 
             Customer::create($validated);
+
+            $event = new CustomerRegisteredEvent();
+            $event->publish([
+                'id' => $validated['id'],
+                'email' => $validated['email'],
+                'name' => $validated['first_name'] . ' ' . $validated['last_name']
+            ]);
 
             return response()->json([
                 'status' => true,
