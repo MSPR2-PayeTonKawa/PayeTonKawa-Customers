@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->boolean('is_active')->default(true);
             $table->datetime('password_updated_at')->useCurrent()->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies')->onDelete('set null');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
     }
