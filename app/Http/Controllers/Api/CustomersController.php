@@ -35,6 +35,7 @@ class CustomersController extends Controller
      *     path="/api/customers",
      *     summary="List all customers",
      *     tags={"Customers"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="Customers retrieved successfully.",
@@ -60,6 +61,7 @@ class CustomersController extends Controller
      *     path="/api/customers",
      *     summary="Create a new customer",
      *     tags={"Customers"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/Customer")
@@ -127,6 +129,7 @@ class CustomersController extends Controller
      *     path="/api/customers/{id}",
      *     summary="Get a customer by ID",
      *     tags={"Customers"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -168,6 +171,7 @@ class CustomersController extends Controller
      *     path="/api/customers/{id}",
      *     summary="Update a customer",
      *     tags={"Customers"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -245,6 +249,7 @@ class CustomersController extends Controller
      *     path="/api/customers/{id}",
      *     summary="Delete a customer",
      *     tags={"Customers"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

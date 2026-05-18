@@ -14,6 +14,13 @@ use OpenApi\Annotations as OA;
  *     url=L5_SWAGGER_CONST_HOST,
  *     description="Serveur principal"
  * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="InternalApiKey",
+ *     type="apiKey",
+ *     in="header",
+ *     name="X-Internal-Api-Key"
+ * )
  */
 abstract class Controller
 {

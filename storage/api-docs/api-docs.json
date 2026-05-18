@@ -34,7 +34,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -57,7 +62,12 @@
                     "201": {
                         "description": "Address created successfully."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         },
         "/api/addresses/{id}": {
@@ -92,7 +102,12 @@
                     "404": {
                         "description": "Address not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -118,7 +133,12 @@
                     "404": {
                         "description": "Address not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -154,7 +174,12 @@
                     "404": {
                         "description": "Address not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         },
         "/api/companies": {
@@ -179,7 +204,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -230,7 +260,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         },
         "/api/companies/{id}": {
@@ -265,7 +300,12 @@
                     "404": {
                         "description": "Company not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -291,7 +331,12 @@
                     "404": {
                         "description": "Company not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -355,7 +400,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         },
         "/api/customers": {
@@ -380,7 +430,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -436,7 +491,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         },
         "/api/customers/{id}": {
@@ -471,7 +531,12 @@
                     "404": {
                         "description": "Customer not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -497,7 +562,12 @@
                     "404": {
                         "description": "Customer not found."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -566,7 +636,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "InternalApiKey": []
+                    }
+                ]
             }
         }
     },
@@ -690,6 +765,13 @@
                     }
                 },
                 "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "InternalApiKey": {
+                "type": "apiKey",
+                "name": "X-Internal-Api-Key",
+                "in": "header"
             }
         }
     },
