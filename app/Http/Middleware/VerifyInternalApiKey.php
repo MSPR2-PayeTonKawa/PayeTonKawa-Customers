@@ -9,8 +9,9 @@ class VerifyInternalApiKey
 {
     public function handle(Request $request, Closure $next)
     {
-        $provided = $request->header('X-Internal-Api-Key')
-            ?: (preg_match('/^ApiKey\s+(.+)$/i', $request->header('Authorization', ''), $m) ? $m[1] : null);
+        $authHeader = $request->header('Authorization', '');
+        $fromAuth = preg_match('/^ApiKey\s+(.+)$/i', $authHeader, $m) ? $m[1] : null;
+        $provided = $request->header('X-Internal-Api-Key') ?: $fromAuth;
 
         $expected = env('INTERNAL_API_KEY');
 
