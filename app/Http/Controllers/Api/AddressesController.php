@@ -37,6 +37,7 @@ class AddressesController extends Controller
      *     path="/api/addresses",
      *     summary="List all addresses",
      *     tags={"Addresses"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="Addresses retrieved successfully.",
@@ -62,6 +63,7 @@ class AddressesController extends Controller
      *     path="/api/addresses",
      *     summary="Create a new address",
      *     tags={"Addresses"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/Address")
@@ -100,6 +102,7 @@ class AddressesController extends Controller
      *     path="/api/addresses/{id}",
      *     summary="Get an address by ID",
      *     tags={"Addresses"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -141,6 +144,7 @@ class AddressesController extends Controller
      *     path="/api/addresses/{id}",
      *     summary="Update an address",
      *     tags={"Addresses"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -197,6 +201,7 @@ class AddressesController extends Controller
      *     path="/api/addresses/{id}",
      *     summary="Delete an address",
      *     tags={"Addresses"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

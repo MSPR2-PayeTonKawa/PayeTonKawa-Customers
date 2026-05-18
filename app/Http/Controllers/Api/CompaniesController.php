@@ -34,6 +34,7 @@ class CompaniesController extends Controller
      *     path="/api/companies",
      *     summary="List all companies",
      *     tags={"Companies"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Response(
      *         response=200,
      *         description="Companies retrieved successfully.",
@@ -59,6 +60,7 @@ class CompaniesController extends Controller
      *     path="/api/companies",
      *     summary="Create a new company",
      *     tags={"Companies"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(ref="#/components/schemas/Company")
@@ -117,6 +119,7 @@ class CompaniesController extends Controller
      *     path="/api/companies/{id}",
      *     summary="Get a company by ID",
      *     tags={"Companies"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -158,6 +161,7 @@ class CompaniesController extends Controller
      *     path="/api/companies/{id}",
      *     summary="Update a company",
      *     tags={"Companies"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -227,6 +231,7 @@ class CompaniesController extends Controller
      *     path="/api/companies/{id}",
      *     summary="Delete a company",
      *     tags={"Companies"},
+     *     security={{"InternalApiKey": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
