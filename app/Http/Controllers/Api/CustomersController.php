@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Services\RabbitMQPublisher;
 use OpenApi\Annotations as OA;
 
 /**
@@ -107,7 +108,13 @@ class CustomersController extends Controller
                 'company_id' => 'nullable|exists:companies,id',
             ]);
 
-            Customer::create($validated);
+            $customer = Customer::create($validated);
+
+            app(RabbitMQPublisher::class)->publishEvent(
+                env('RABBITMQ_QUEUE_CUSTOMERS', 'customers'),
+                'customer.registered',
+                $customer->toArray()
+            );
 
             return response()->json([
                 'status' => true,
@@ -237,6 +244,12 @@ class CustomersController extends Controller
 
         $customer->update($validated);
 
+        app(RabbitMQPublisher::class)->publishEvent(
+            env('RABBITMQ_QUEUE_CUSTOMERS', 'customers'),
+            'customer.updated',
+            $customer->toArray()
+        );
+
         return response()->json([
             'status' => true,
             'message' => 'Customer updated successfully.',
@@ -277,7 +290,15 @@ class CustomersController extends Controller
             ], 404);
         }
 
+        $customerId = $customer->id;
         $customer->delete();
+
+        app(RabbitMQPublisher::class)->publishEvent(
+            env('RABBITMQ_QUEUE_CUSTOMERS', 'customers'),
+            'customer.deleted',
+            ['id' => $customerId]
+        );
+
         return response()->json([
             'status' => true,
             'message' => 'Customer deleted successfully.',
